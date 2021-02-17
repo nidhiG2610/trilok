@@ -124,6 +124,16 @@ router.post('/saveNewUserData', (req, res) => {
     });
 });
 
+//addNewItem
+router.post('/addNewItem', (req, res) => {
+    console.log(req.body);
+    var userData = req.body;
+    User.SaveItemData(userData, (err, result) => {
+        if (err) throw err;
+        console.log(err);
+        res.send({ 'message': 'succeed', 'data': result });
+    });
+});
 
 router.post('/saveChangedStatus', (req, res) => {
     var userData = req.body;
@@ -134,6 +144,83 @@ router.post('/saveChangedStatus', (req, res) => {
         res.send({ 'message': 'succeed', 'data': result, 'status' : 200 });
     });
 });
+//changeOrderStatus
+
+router.post('/saveChangedOrderStatus', (req, res) => {
+    var userData = req.body;
+    console.log(userData);
+    //  if (userData.order_status == )
+    User.saveChangedOrderStatus(userData, (err, result) => {
+        if (err) throw err;
+        console.log(err);
+        res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    });
+});
+
+router.get('/getDataforDashboradLabels', (req, res) => {
+    var userData = req.body;
+    var totalAdvance;
+    var totalSale;
+    let CompletedOrders;
+    //  if (userData.order_status == )
+    User.getOrderTotal(userData, (err, result) => {
+        if (err) throw err;
+        res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    }); 
+});
+
+router.get('/getTotalAdvanceReservation', (req, res) => {
+    var userData = req.body;
+
+    User.getTotalAdvanceReservation(userData, (err, result) => {
+        if (err) throw err;
+        res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    });
+});
+
+router.get('/getTotalDoneDelivery', (req, res) => {
+    var userData = req.body;
+
+    // total delivery
+    User.getTotalDoneDelivery(userData, (err, result) => {
+        if (err) throw err;
+         res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    });
+});
+
+
+router.get('/getaddressDetailsById/Id/:id', (req, res) => {
+    var userData = req.params.id;
+    User.getOnlineOrderById(userData, (err, result) => {
+        console.log(result);
+    res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    });
+});
+
+
+router.get('/getMonthlyData', (req, res) => {
+    var userData = req;
+    User.getMonthlyData(userData, (err, result) => {
+        console.log(result);
+        res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    });
+});
+
+router.get('/getNewOrderCount', (req, res) => {
+    var userData = req.params;
+    User.getNewOrderCount(userData, (err, result) => {
+        console.log(result);
+        res.send({ 'message': 'succeed', 'data': result, 'status': 200 });
+    });
+});
+
+//getItemListOnLoad
+router.get('/getItemListOnLoad', (req, res) => {
+    var userData = req.body;
+    User.getAllItems(userData, (err, result) => {
+        res.send({ 'message': 'succeed', 'data': result });
+    });
+}); 
 
 /*
 *  registration method to check user authentication
@@ -143,28 +230,86 @@ router.post('/saveChangedStatus', (req, res) => {
 */
 router.post('/register', (req, res) => {
     var newData = req.body;
-
+   // console.loh(newData);
     // bcrypt the password and store hash to table
     newData.password = bcrypt.hashSync(newData.password);
 
     User.SaveUserData(newData, (err, result) => {
         if (err) throw err;
-        res.send({ 'message': 'Added Successfylly!','data':result });
+       // console.log(err);
+        res.send({ 'message': 'Added Successfylly!', 'data': result, 'status': 200 });
     });
 });
+
+
+
+/*
+*  registration method to check user authentication
+*  @params req Http request
+*  @ params res
+*  return res.json  
+*/
+router.post('/createOnlineOrder', (req, res) => {
+    var newData = req.body;
+    User.SaveOnlineOrder(newData, (err, result) => {
+        if (err) throw err;
+        res.send({ 'message': 'Added Successfylly!', 'data': result, 'status': 200  });
+    });
+    
+});
+
+/*
+*  registration method to check user authentication
+*  @params req Http request
+*  @ params res
+*  return res.json  
+*/
+router.post('/createOnlineReservation', (req, res) => {
+    console.log('hello in method');
+    var newData = req.body;
+    User.SaveOnlineReservation(newData, (err, result) => {
+        if (err) throw err;
+        res.send({ 'message': 'Added Successfylly!', 'data': result, 'status': 200  });
+    });
+
+});
+
+router.post("/charge", (req, res) => {
+    try {
+        stripe.customers
+            .create({
+                name: req.body.name,
+                email: req.body.email,
+                source: req.body.stripeToken
+            })
+            .then(customer =>
+                stripe.charges.create({
+                    amount: req.body.amount * 100,
+                    currency: "usd",
+                    customer: customer.id
+                })
+            )
+            .then(() => res.send())
+            .catch(err => console.log(err));
+    } catch (err) {
+        res.send(err);
+    }
+})
 
 /*
 *  login method to check user authentication
 *  @params req Http request
 *  @ params res
 *  return res.json  
-*/
+*
 router.post('/login', (req, res, next) => {
+    let sess = req.session;
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             return res.status(401).json(err);
         }
         if (user) {
+            sess.id = user.id;
             return res.status(200).json({
                 "status": 200,
                 "message": 'Login Successfull.',
@@ -174,7 +319,7 @@ router.post('/login', (req, res, next) => {
             res.send({'status':401,'data':info}); //status(401).json(info);
         }
     })(req, res, next)
-});
+}); */
 
 
 //login user  passport authentication
@@ -182,7 +327,6 @@ passport.use(new LocalStrategy({
     usernameField: 'email',    // define the parameter in req.body that passport can use as username and password
     passwordField: 'password'
 }, function (email, password, done) {
-    console.log('passposte');
     User.getUserPasswordbyUsername({ email: email }, function (err, user) {
         //if (err) { return done(err); }  
         if (!user) {
@@ -196,7 +340,7 @@ passport.use(new LocalStrategy({
             } else {
                 if (err) throw err;
                 console.log('in ismatch false4' + isMatch);
-                return res.send({ message: 'Incorrect password.' });
+                return res.send({ message: err });
             }
         });
 
@@ -205,13 +349,15 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser(function (user, done) {
-    console.log('in serialize user');
     done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
-    console.log('in deserialize user');
-    done(null, user);
+
+    User.getUserById(id, function (err, user) {
+        done(err, user);
+    });
+   
 });
 
 /*
@@ -221,8 +367,12 @@ passport.deserializeUser(function (user, done) {
 *  return res.json  
 */
 router.get('/logout', (req, res) => {
-    req.logout();
-    res.send({'status':200,'message':'you are logged out.'});
+    req.session.destroy((err) => {
+        if (err) {
+            return console.log(err);
+        }
+    });
+    res.send({ 'status': 200, 'message': 'you are logged out.' });
 });
 
 

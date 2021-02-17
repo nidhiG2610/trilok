@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Trilok | When Spices Start speaking </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
+    <link rel="stylesheet" href="assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css">
+    <link rel="stylesheet" href="assets/vendors/iconfonts/font-awesome/css/font-awesome.min.css" />
+
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/demo_1/style.css">
+    <!-- End Layout styles -->
+    <link rel="shortcut icon" href="assets/images/logo-trilok.png" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/methods.js"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+                <a class="navbar-brand brand-logo" href="index.html">
+                    <img src="assets/images/logo.svg" alt="logo" height="70" />
+                </a>
+                <a class="navbar-brand brand-logo-mini" href="../src/index.html">
+                    <img src="assets/images/logo-mini.svg" alt="logo" />
+                </a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item font-weight-semibold d-none d-lg-block">Item Management</li>
+
+                </ul>
+                <form class="ml-auto search-form d-none d-md-block" action="#">
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search Here">
+                    </div>
+                </form>
+              
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <a href="#" class="nav-link">
+                            <div class="profile-image">
+                                <img class="img-xs rounded-circle" src="assets/images/faces/face8.jpg" alt="profile image">
+                                <div class="dot-indicator bg-success"></div>
+                            </div>
+                            <div class="text-wrapper">
+                                <p class="profile-name">Allen Moreno</p>
+                                <p class="designation">Premium user</p>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="orderMangement.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Order Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservationManagement.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Reservation Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="deliveryManagement.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Delivery Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="itemManagement.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Item Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="userManagement.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">User Management</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="card-title col-md-6">
+                                            Add new item
+                                        </div>
+                                        <div class="col-md-6">
+                                           <div id="message" style="color:green;"></div>
+
+                                        </div>
+
+                                    </div>
+                                    <form class="form-sample" id="addItemForm" name="addItemForm" action="javascript:void(0)">                                      
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="item_name">Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="item_name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="quantity">Quantity</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="quantity" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="price">Price</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="price" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mx-auto">
+                                                <button type="submit" class="btn btn-success btn-fw" id="submitItemForm">
+                                                    <i class="fa fa-save"></i>Submit
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btn-fw">
+                                                    <i class="fa fa-rotate-right"></i>Reset
+                                                </button>
+
+                                            </div>
+                                        </div>                                       
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <footer class="footer">
+                    <div class="container-fluid clearfix">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2019 <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                            Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i>
+                        </span>
+                    </div>
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="assets/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="assets/js/shared/off-canvas.js"></script>
+    <script src="assets/js/shared/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
+    <script>
+     
+
+        $("#submitItemForm").click(function () {
+            var formData = $("#addItemForm").serialize();
+            $("#addItemForm").submit(function (e) {
+                
+                addNewItem(formData);
+                /*if (fun == true) {
+                    alert('your data is submitted');
+                    window.location.replace = "/userManagement.html";
+                }*/
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+.container {
+	clear: both;
+	overflow: auto;
+	/* background-color: black; */
+	height: 100;
+}
+
+.logo img
+{
+	float:left;
+}
+.topbar
+{
+	
+	height: 100;
+	width: 100;
+}
+.menubar
+{
+	background-color:#333;
+	width: 100;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+ul li{
+  display: inline-block; 
+  padding:10px;
+  font-size:20px;
+   font-family: Helvitica;
+
+  
+} 
+
+ul li:hover{
+
+  color:orange;
+  
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  color:orange;
+}
+
+.button {
+  background-color: #f59304; 
+  border: none;
+  color: white;
+  padding: 20px 30px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  float: right;
+}
+
+.button1 {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: red;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button1:hover {background-color: #3e8e41}
+
+.button1:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.mySlides {display:none;}
+
+.special
+{
+	float: left;
+}
+#specialdish {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  
+}
+
+#specialdish th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  background-color: black;
+  color: white;
+}
+#specialdish td
+{
+  border: 1px solid #ddd;
+  padding: 8px;
+  background-color: #d6fcc8;
+}
+
+.footer1
+{
+    background-color: #333;
+    height:50px;
+    color: white;
+    text-align: center;
+
+
+}
+.footer2
+{
+    /*background-color: black;*/
+    height:100px;
+
+    
+}
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+/*.StripeElement {
+	width:500px;
+	box-sizing: border-box;
+	height: 40px;
+	padding: 10px 12px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+	border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+	background-color: #fefde5 !important;
+}*/
+.paymentDiv{
+	display:none;
+}

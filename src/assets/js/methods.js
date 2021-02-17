@@ -252,10 +252,11 @@ function login(formData) {
         response.json().then(data => {
             console.log(response);
             if (response.status == 200) {
+                loginSuceeded(response.data);
                 var location = window.location.href;
                 var ns = location.substring(0, location.lastIndexOf('/'));
-                window.location.replace(ns + '/index.html');
-                console.log(ns);
+               window.location.replace(ns + '/index.html');
+                //console.log(ns);
                 return response;
             } else {
                 alert('Please try again!');
@@ -267,6 +268,9 @@ function login(formData) {
     });
 };
 
+function loginSuceeded(data) {
+    console.log(data);
+}
 
 function diff_minutes(dt2, dt1) {
     var diff = (dt2.getTime() - dt1.getTime()) / 1000;

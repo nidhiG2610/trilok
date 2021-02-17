@@ -1,0 +1,59 @@
+const stripe = Stripe('pk_test_51HVqWbAzoAgSe0DBeuhB9By7k2pziy7Xa9AcBcbhvuH3M4PuhIkxItNxUKTG8dwkqzkBFoa6HZXtyyuVqxEMGBer00saPhIxvK'); // Your Publishable Key
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+        var card = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    iconColor: '#666EE8',
+                    color: '#31325F',
+                    lineHeight: '40px',
+                    fontWeight: 300,
+                    fontFamily: 'Helvetica Neue',
+                    fontSize: '15px',
+
+                    '::placeholder': {
+                        color: '#CFD7E0',
+                    },
+                },
+            }
+        });
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+       /* const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const { token, error } = await stripe.createToken(card);
+            if (error) {
+                const errorElement = document.getElementById('card-errors');
+                errorElement.textContent = error.message;
+			} else {
+				
+                stripeTokenHandler(token);
+            }
+        });*/
+
+		const stripeTokenHandler = (token) => {
+			const form = document.getElementById('payment-form');  //-form
+			const hiddenInput = document.createElement('input');
+			const submitButton = document.querySelector('.submit-form');
+			hiddenInput.setAttribute('type', 'hidden');
+			hiddenInput.setAttribute('name', 'stripeToken');
+			hiddenInput.setAttribute('value', token.id);
+			form.appendChild(hiddenInput);
+		}
+            // form.submit();
+
+            //new AJAX code
+		const submitForm = (e) => {
+            const request = new XMLHttpRequest();
+            request.open('POST', 'http://localhost:3000/charge');
+				request.onreadystatechange = () => {
+					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+						alert('sucees');
+					}
+			}			
+          request.send(new FormData(event.target));
+            };
+		//form.addEventListener('submit', submitForm);

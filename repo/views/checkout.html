@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/Front/CSS/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/Front/CSS/payment.css">
+
+</head>
+<body>
+    <!-- 	Navigation menu bar -->
+    <header>
+        <div class="container" style="background-color: white">
+            <div class="logo">
+                <img src="/Front/Images/Trilok.jpeg" alt="logo" width="280" height="100">
+            </div>
+
+            <button class="button" onclick="window.location.href='contactus.html'">Contact Us</button>
+            <button class="button" onclick="window.location.href='login.html'">Login</button>
+            <button class="button" onclick="window.location.href='signup.html'">Sign Up</button>
+
+        </div>
+
+        <div class="menubar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="reservation.html">Make a reservation</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+
+            </ul>
+
+        </div>
+    </header>
+
+    <!-- Navigation menu bar -->
+    <h1 style="text-align: center;">Billing Address</h1>
+    <div class="row">
+        <div class="col-75">
+            <div class="containerpay center">
+                <form id="checkoutForm" name="checkoutForm" action="javascript:void(0)">
+                    <div class="row">
+                        <label for="first_name"><i class="fa fa-user"></i> First Name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="John">
+                        <label for="last_name"><i class="fa fa-user"></i> Last Name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Doe">
+                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                        <input type="text" id="email" name="email" placeholder="john@example.com">
+                        <label for="mobile"><i class="fa fa-envelope"></i> Mobile Number</label>
+                        <input type="text" id="mobile" name="mobile" placeholder="john@example.com">
+                        <label for="order_date"><i class="fa fa-address-card-o"></i> Order Date</label>
+                        <input type="date" id="email" name="order_date" placeholder="2020/01/01">
+                        <label for="address"><i class="fa fa-address-card-o"></i> Address</label>
+                        <input type="text" id="address" name="address" placeholder="542 W. 15th Street">
+                        <label for="city_id"><i class="fa fa-institution"></i> City</label>
+                        <input type="text" id="city_id" name="city_id" placeholder="New York">
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" placeholder="NY">
+                            </div>
+                            <div class="col-50">
+                                <label for="postal_code">Zip</label>
+                                <input type="text" id="postal_code" name="postal_code" placeholder="10001">
+                            </div>
+                        </div>
+                    </div>
+                    <label>
+                        <input type="checkbox" onclick="SetBilling(this.checked);" checked="checked" name="sameadr"> Shipping address same as billing
+                    </label>
+                    <div class="row" id="deliveryaddres" style="display:none;">
+                        <h2>Shipping Address details</h2>
+                        <br>
+                        <div class="row">
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="john@example.com">
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                            <label for="city"><i class="fa fa-institution"></i> City</label>
+                            <input type="text" id="city" name="city" placeholder="New York">
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" name="state" placeholder="NY">
+                                </div>
+                                <div class="col-50">
+                                    <label for="zip">Zip</label>
+                                    <input type="text" id="zip" name="zip" placeholder="10001">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" id="checkoutButton">Continue to Payment</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <script src="https://js.stripe.com/v3/"></script>
+<!--    <script src="../assets/card.js"></script>
+-->
+    <div class="paymentDiv">
+        <div>
+            <h1 style="text-align: center;">Payment</h1>
+        </div>
+        <div>
+            <form id="payment-form">
+                <div class="form-row">
+                    <label for="card-element">
+                        Credit or debit card
+                    </label>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+
+                    <!-- Used to display form errors. -->
+                    <div id="card-errors" role="alert"></div>
+                </div>
+
+                <button type="submit" class="btn" id="paymentButton">Pay</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--    <script src="../assets/card.js"></script>-->   
+    <script type="text/javascript">
+
+        $("#checkoutButton").click(function () {
+            $(".paymentDiv").css("display", "block");
+        });
+
+
+        // Create a Stripe client.
+        const stripe = Stripe('pk_test_51HVqWbAzoAgSe0DBeuhB9By7k2pziy7Xa9AcBcbhvuH3M4PuhIkxItNxUKTG8dwkqzkBFoa6HZXtyyuVqxEMGBer00saPhIxvK'); // Your Publishable Key
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        var card = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    iconColor: '#666EE8',
+                    color: '#31325F',
+                    lineHeight: '40px',
+                    fontWeight: 300,
+                    fontFamily: 'Helvetica Neue',
+                    fontSize: '15px',
+
+                    '::placeholder': {
+                        color: '#CFD7E0',
+                    },
+                },
+            }
+        });
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+        // Handle real-time validation errors from the card Element.
+        card.on('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            addOnlineOrders();
+            event.preventDefault();
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+               
+                        // Send the token to your server.
+                        stripeTokenHandler(result.token);                                        
+                }
+            });
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+            // Submit the form
+            form.submit();
+        }
+
+    //$("#paymentButton").click(function () {
+    function addOnlineOrders () {
+            var formData = $("#checkoutForm").serialize();
+            $("#checkoutForm").submit(function (e) {
+                fetch('http://localhost:3000/createOnlineOrder', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*', 'Accept': 'application/json' },
+                    body: (formData)
+                }).then((response) => {
+                    response.json().then(data => {
+                        if (response.status == 200) {
+                            console.log(response);
+                            return true;
+                        }
+                    });
+                });
+            });
+     };
+
+    function SetBilling(checked) {
+            if (checked) {
+                document.getElementById('deliveryaddres').style.display = "none";
+            }
+            else {
+                document.getElementById('deliveryaddres').style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Reservation Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/Front/CSS/style.css">
+	<link rel="stylesheet" type="text/css" href="/Front/CSS/reservation.css">
+	<link rel="stylesheet" type="text/css" href="/Front/CSS/radio.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+		        function ValidateEmail(inputText)
+				{
+				var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+				if(inputText.value.match(mailformat))
+				{
+				alert("Entered Valid email address!");
+				document.form1.text1.focus();
+				return true;
+				}
+				else
+				{
+				alert("You have entered an invalid email address!");
+				document.form1.text1.focus();
+				return true;
+				}
+				}
+
+        
+
+	</script>
+<!-- 	Navigation menu bar -->
+<header>
+	<div class="container" style="background-color: white">
+		<div class="logo">
+			  <img src="../Front/Images/Trilok.jpeg" alt="logo" width="280">
+		</div>	
+		 <button class="button" onclick="window.location.href='contactus.html'">Contact Us</button>
+		  <button class="button" onclick="window.location.href='login.html'">Login</button>
+		  <button class="button" onclick="window.location.href='signup.html'">Sign Up</button>	
+	</div>
+			
+	<div class="menubar">		
+			<ul>
+				  <li><a href="index.html">Home</a></li>
+				  <li><a href="aboutus.html">About Us</a></li>
+				  <li><a href="menu.html">Menu</a></li>
+				  <li><a href="order.html">Order</a></li>
+				  <li><a href="Reservation.html">Make a reservation</a></li>
+				    <li><a href="feedback.html">Feedback</a></li>
+		
+			</ul>		
+	</div>
+</header>
+
+<!-- Navigation menu bar -->
+
+<!-- <div class="main-container" style="background-image: url('../Trilok/Images/banner.jpg'); width: 100%;height: 700px;background-repeat: no-repeat;">
+ -->	
+ <div class="main-container">
+	<div class="row" >
+		<div class="column">
+			<div id="resev">
+				<h2>MAKE YOUR RESERVATION</h2>
+				<div id="frm">
+<!--					<form name="form1" method="post" onload='document.form1.text1.focus()'>--->		
+					<form name="ReservationForm" id="ReservationForm" onload='document.form1.text1.focus()' action="javascript:void(0)">
+						<div>
+							<label for="first_name"><b>First Name</b></label>
+							<input type="text" placeholder="Enter your name" name="first_name" required>
+							<br>
+							<label for="last_name"><b>Last Name</b></label>
+							<input type="text" placeholder="Enter your name" name="last_name" required>
+							<br>
+							<label for="email"><b>Email</b></label>
+							<input type="text" placeholder="abc@abc.com" name="email">
+							<br>
+							<label for="contact_number"><b>Contact Number</b></label>
+							<input type="text" placeholder="abc@abc.com" name="contact_number">
+							<br>
+							<label for="date"><b>Date</b></label>
+							<input type="date" name="date" required>
+							<br>
+							<label for="time"><b>Time</b></label>
+							<input type="date" name="time" required>
+							<br>
+							<label for="number_of_people"><b>People</b></label>
+							<input type="number" placeholder="Enter number of People" name="number_of_people" id="number_of_people" required>
+							<br>
+							<input type="checkbox" required name="checkbox" value="check" id="agree" />
+							<label id="ppLMessage"> </label>
+							<br>
+							<button class="btn" id="Next" disabled onclick="ValidateEmail(document.form1.text1)">
+								<span>BOOK</span>
+							</button>
+							<button onclick="window.location.href='Payment.html'">next</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<hr/>
+			<script src="https://js.stripe.com/v3/"></script>
+			<!--    <script src="../assets/card.js"></script>-->
+			<div class="row">
+				<div class="paymentDiv">
+					<div>
+						<h1 style="text-align: center;">Payment</h1>
+					</div>
+					<div>
+						<form id="payment-form">
+							<div class="form-row">
+								<label for="card-element">
+									Credit or debit card
+								</label>
+								<div id="card-element">
+									<!-- A Stripe Element will be inserted here. -->
+								</div>
+
+								<!-- Used to display form errors. -->
+								<div id="card-errors" role="alert"></div>
+							</div>
+
+							<button type="submit" class="btn" id="paymentButton">Pay</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+	<script type="text/javascript">	
+        document.getElementById("agree").style.display = "none"; 
+        document.getElementById("agree").addEventListener('change', function () {
+            if (this.checked) {
+                document.getElementById("Next").disabled = false;
+            } else {
+                document.getElementById("Next").disabled = true;
+            }
+		});
+
+		function logKey(e) {
+            document.getElementById("agree").style.display = "inline"; 
+
+            var num = document.getElementById("number_of_people").value;			
+			console.log(num);
+			//var advance = (() ? (Math.ceil((num * 10) / 5)) : (10));
+			function advance(num) {
+				
+				var amt;
+				if ( num <= 5 ) {
+					amt = 10;
+				} else {
+					amt = ((num / 5) * 10);
+				}
+				return amt;
+			}
+			document.getElementById("ppLMessage").innerText = "You are " + num + " of people, which will charge you " + advance(num) + " as an advance Payment. Which will be diducted from your bill upon show up.";
+		}
+		document.addEventListener('change', logKey);
+
+        $("#Next").click(function () {
+            $(".paymentDiv").css("display", "block");
+		});
+
+        // Create a Stripe client.
+        const stripe = Stripe('pk_test_51HVqWbAzoAgSe0DBeuhB9By7k2pziy7Xa9AcBcbhvuH3M4PuhIkxItNxUKTG8dwkqzkBFoa6HZXtyyuVqxEMGBer00saPhIxvK'); // Your Publishable Key
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+        var card = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    iconColor: '#666EE8',
+                    color: '#31325F',
+                    lineHeight: '40px',
+                    fontWeight: 300,
+                    fontFamily: 'Helvetica Neue',
+                    fontSize: '15px',
+
+                    '::placeholder': {
+                        color: '#CFD7E0',
+                    },
+                },
+            }
+        });
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const { token, error } = await stripe.createToken(card);
+            if (error) {
+                const errorElement = document.getElementById('card-errors');
+                errorElement.textContent = error.message;
+            } else {
+                stripeTokenHandler(token);
+            }
+        });
+
+		const stripeTokenHandler = (token) => {
+			const form = document.getElementById('payment-form');
+			const hiddenInput = document.createElement('input');
+			const submitButton = document.querySelector('.submit-form');
+			hiddenInput.setAttribute('type', 'hidden');
+			hiddenInput.setAttribute('name', 'stripeToken');
+			hiddenInput.setAttribute('value', token.id);
+			form.appendChild(hiddenInput);
+		}
+            // form.submit();
+
+            //new AJAX code
+		const submitForm = (e) => {
+            const request = new XMLHttpRequest();
+            request.open('POST', 'http://localhost:3000/charge');
+				request.onreadystatechange = () => {
+					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                        addResrvetionData();
+					}
+			}
+			
+          request.send(new FormData(event.target));
+            };
+            form.addEventListener('submit', submitForm);
+
+		function addResrvetionData() {
+			alert('in reservation');
+            var formData = $("#ReservationForm").serialize();
+            $("#ReservationForm").submit(function (e) {
+                alert('in reservation');
+                fetch('http://localhost:3000/createOnlineReservation', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*', 'Accept': 'application/json' },
+                    body: (formData)
+                }).then((response) => {
+                    response.json().then(data => {
+                        if (response.status == 200) {
+                            console.log(response);
+                            return true;
+                        }
+                    });
+                });
+            });
+		}
+
+	</script>
+</body>
+</html>

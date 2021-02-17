@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.main-container{
+  padding-left: 350px;
+
+}
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#resev
+{
+	background-color: black;
+	text-align: center;
+	color: white;
+}
+
+#frm{
+	background-color: #d6fcc8;
+	height: 100%;
+}
+#open
+{
+	background-color: black;
+	text-align: center;
+	color: white;
+}
+
+#tim{
+text-align: center;
+
+  /* background-color: #feeacf;
+background-image: linear-gradient(315deg, #feeacf 0%, #f79b73 74%);*/
+background-color: #fffdf6;
+background-image: linear-gradient(315deg, #fffdf6 0%, #fddac5 74%);
+
+
+    height: 730px;
+    border: 1px ;
+    padding: 10px;
+    box-shadow: 5px 10px 20px #FFC0CB inset;
+    font-style: oblique;
+    font-weight: 900;
+    font-family: Didot, serif;
+    color: #e91e63;
+    font-size: 35px;
+
+}
+
+/** Full-width input fields */
+input[type=text], input[type=password],input[type=number],input[type=date] {
+  width: 60%;
+  padding: 25px 20px;
+  margin: 20px 40px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+}
+label{
+	color: #e91663;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+.cont {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  
+}
+
+.center {
+  width: 180px;
+  height: 60px;
+  position: absolute;
+}
+
+.btn {
+  width: 180px;
+  height: 60px;
+  cursor: pointer;
+  background-color: red;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+
+svg {
+  position: absolute;
+  left: 230.7px;
+  top: 942px;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.btn:hover {
+  transition: 1s ease-in-out;
+  background: #BDDFF2;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.btn span {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+
+
+

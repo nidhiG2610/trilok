@@ -1,0 +1,20 @@
+div.menu {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 170px;
+}
+
+div.menu:hover {
+  border: 1px solid #777;
+}
+
+div.menu img {
+  width: 100%;
+  height: auto;
+}
+
+div.menu {
+  padding: 8px;
+  text-align: center;
+}
